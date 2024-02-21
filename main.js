@@ -1,13 +1,12 @@
-let navBar = document.querySelector(".nav-bars");
-let menuList = document.querySelector(".menus");
-navBar = addEventListener("click",() =>{
-menuList.classList.toggle('open');
-})
-menuList.addEventListener("click",() =>{
-    menuList.classList.remove('open');
-})
+const openNav = () => {
+    document.getElementById("mySidenav").style.width = "250px";
+  };
+  
+  const closeNav = () => {
+    document.getElementById("mySidenav").style.width = "0";
+  };
 
-const openSearchBox = () => {
+  const openSearchBox = () => {
     let inputArea = document.getElementById("input-area");
     if (inputArea.style.display === "inline") {
       inputArea.style.display = "none";
