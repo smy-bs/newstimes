@@ -6,7 +6,7 @@ let newsList = [];
 const getLatesNews = async() => {
     const url = new URL (
         // `https://newsapi.org/v2/top-headlines?country=us&apikey=${API_KEY}`
-         `https://newstimes-noonaproject.netlify.app/top-headlines?category=business`
+         `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines`
     );
 const response = await fetch(url);
 const data = await response.json();
@@ -18,7 +18,8 @@ const getNewsByKeyword = async () => {
   const keyword = document.getElementById("search-input").value;
   console.log("keyword");
   const url = new URL (
-    `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apikey=${API_KEY}`
+    // `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apikey=${API_KEY}`
+      `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines?q=${keyword}`
   );
 
   const response = await fetch(url)
@@ -32,7 +33,8 @@ const getNewsByCategory= async (event) => {
   const category = event.target.textContent.toLowerCase();
   console.log(category);
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apikey=${API_KEY}`
+    // `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apikey=${API_KEY}`
+        `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines?category=${category}`
     );
     const response = await fetch(url)
     const data = await response.json();
