@@ -6,7 +6,7 @@ let newsList = [];
 const getLatesNews = async() => {
     const url = new URL (
         // `https://newsapi.org/v2/top-headlines?country=us&apikey=${API_KEY}`
-         `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines`
+         `https://newstimes-noonaproject.netlify.app/top-headlines?`
     );
 const response = await fetch(url);
 const data = await response.json();
@@ -19,7 +19,7 @@ const getNewsByKeyword = async () => {
   console.log("keyword");
   const url = new URL (
     // `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apikey=${API_KEY}`
-      `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines?q=${keyword}`
+      `https://newstimes-noonaproject.netlify.app/top-headlines?q=${keyword}`
   );
 
   const response = await fetch(url)
@@ -34,7 +34,7 @@ const getNewsByCategory= async (event) => {
   console.log(category);
   const url = new URL(
     // `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apikey=${API_KEY}`
-        `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines?category=${category}`
+        `https://newstimes-noonaproject.netlify.app/top-headlines?category=${category}`
     );
     const response = await fetch(url)
     const data = await response.json();

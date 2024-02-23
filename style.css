@@ -31,7 +31,9 @@
 .news{
     border-bottom: 2px solid black;
 }
-
+.hide {
+  display: none;
+}
 .side-menu {
     height: 100%;
     width: 0;
@@ -53,7 +55,7 @@
   
   .side-menu .closebtn {
     position: absolute;
-    top: 0;
+    top: 0px;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
@@ -93,6 +95,8 @@
 @media screen and (max-width: 63rem) {
     .hide {
       display: inline;
+      position:absolute;
+      top:0px;
     }
     .menus {
       display: none;
