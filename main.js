@@ -1,4 +1,5 @@
-const menus = document.querySelectorAll(".menus button");
+const menus = document.querySelectorAll
+(".menus button");
 menus.forEach((menu) =>
   menu.addEventListener("click", (event) => getNewsByCategory(event))
 );

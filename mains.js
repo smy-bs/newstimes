@@ -1,9 +1,10 @@
 const API_KEY = `63f5f229f63e4668897bf96f197f7b39`;
 let newsList = [];
-const menus = document.querySelectorAll(".menus button");
+const menus = document.querySelectorAll
+(".menus button");
 
-let url = new URL(`https://newstimes-noonaproject.netlify.app/top-headlines?`);
-// `https://newsapi.org/v2/top-headlines?country=us&apikey=${API_KEY}`
+let url = new URL(//`https://newstimes-noonaproject.netlify.app/top-headlines?`
+`https://newsapi.org/v2/top-headlines?country=us&apikey=${API_KEY}`);
 
 let totalResults = 0; 
 let page = 1;
@@ -38,8 +39,8 @@ const openSearchBox = () => {
 //getNews repectoring
 const getNews = async () => {
   try {
-    url.searchParams.set("page",page) // => &page=page
-    url.searchParams.set ("pageSize",pageSize);
+    url.searchParams.set("page",page); // => &page=page
+    url.searchParams.set("pageSize",pageSize);
 
     const response = await fetch(url);
     const data = await response.json();
@@ -50,7 +51,7 @@ const getNews = async () => {
       newsList = data.articles;
       totalResults = data.totalResults;
       render();
-      paginationRender = ();
+      paginationRender();
     } else {
       throw new Error(data.message);
     }
@@ -61,8 +62,8 @@ const getNews = async () => {
 
 // call news
 const getLatesNews = async () => {
-  url = new URL(`https://newstimes-noonaproject.netlify.app/top-headlines?pageSize=${PAGE_SIZE}`);
-  // `https://newsapi.org/v2/top-headlines?country=us&apikey=${API_KEY}`
+  url = new URL(//`https://newstimes-noonaproject.netlify.app/top-headlines?pageSize=${PAGE_SIZE}`
+  `https://newsapi.org/v2/top-headlines?country=us&apikey=${API_KEY}`);
   getNews();
 };
 
@@ -70,8 +71,8 @@ const getLatesNews = async () => {
 const getNewsByKeyword = async () => {
   const keyword = document.getElementById("search-input").value;
   url = new URL(
-    `https://newstimes-noonaproject.netlify.app/top-headlines?q=${keyword}`
-  ); // `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apikey=${API_KEY}`
+    //`https://newstimes-noonaproject.netlify.app/top-headlines?q=${keyword}`
+   `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apikey=${API_KEY}`);
   getNews();
 };
 
@@ -79,8 +80,8 @@ const getNewsByKeyword = async () => {
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
   url = new URL(
-    `https://newstimes-noonaproject.netlify.app/top-headlines?category=${category}`
-  ); // `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apikey=${API_KEY}`
+    //`https://newstimes-noonaproject.netlify.app/top-headlines?category=${category}`
+   `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apikey=${API_KEY}`);
   getNews();
 };
 
@@ -123,16 +124,21 @@ ${errorMessage}
 //lastpage
 //firstPage
 
+const moveToPage =(pageNum) => {
+  page = pageNum;
+    getNews();
+  };
+
 const paginationRender = () => {
 
 const totalPages = Math.ceil(totalResults / pageSize);
 
-const pageGroup = Math.cell(page / groupSize);
-const lastPage = pageGroup * groupSize;
+const pageGroup = Math.ceil(page / groupSize);
+let lastPage = pageGroup * groupSize;
 if(lastPage > totalPages){
   lastPage = totalPages;
 }
-const firstPage = lastPage - (groupSize-1) <= 0 ? 1 : lastPage - (groupSize-1); 
+let firstPage = lastPage - (groupSize-1) <= 0 ? 1 : lastPage - (groupSize-1); 
 
 let paginationHTML = ``;
 for(let i = firstPage; i<= lastPage; i ++){
@@ -143,10 +149,6 @@ for(let i = firstPage; i<= lastPage; i ++){
 
 document.querySelector(".pagination").innerHTML = paginationHTML;
 
-const moveToPage =(pageNum) => {
-page = pageNum
-  getNews();
-}
 
 };
 getLatesNews();
