@@ -22,7 +22,12 @@
 }
 
 .menus button:hover{
-    background-color:beige;
+    background-color:rgb(102, 102, 101);
+    border-radius: 8px;
+    color:whitesmoke;
+}
+li.page-item{
+  cursor: pointer;
 }
 .news-img-size{
     max-width:100%;
@@ -41,10 +46,11 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: burlywood;
+    background-color: rgb(94, 92, 91);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    
   }
   .side-menu-list button {
     margin: 5px;
@@ -70,10 +76,11 @@
   }
   
   .side-menu-list button:hover {
-    background-color: beige;
-    border-radius: 3px;
+    background-color: rgb(40, 40, 39);
+    border-radius: 9px;
+    color:white;
   }
-.sarch-button {
+.search-button {
     background-color: rgb(86, 123, 149);
     border: 1px solid rgb(50, 104, 145);
     color: rgb(255, 255, 255);
@@ -89,14 +96,56 @@
   #input-area {
     display: none;
   }
-  
+  .newsbox{
+    padding-top: 1.2rem;
+  }
+  .title{
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding-top: 20px;
+  }
+.newsCol{
+  border:0.5px solid rgb(196, 194, 194);
+  padding:1.4rem;
+}
+ .news-img-size:hover {
+  transform: scale(1.1);
+  transition: transform 0.5s ease-in-out;
+  border-radius: 15px;
+}
 
+.news-img-size {
+  overflow-x: scroll;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.news-img-size{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pagination{
+display: flex;
+justify-content: center;
+padding: 15px;
+}
+.page-link{
+  color:black;
+}
+.active>.page-link{
+  color:black;
+  background-color:gray;
+  border-color: black;
+}
 /* responsive */
 @media screen and (max-width: 63rem) {
     .hide {
       display: inline;
       position:absolute;
       top:0px;
+      left:2.8rem;
     }
     .menus {
       display: none;
