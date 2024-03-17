@@ -7,8 +7,8 @@ let url = new URL(`https://newstimes-noonaproject.netlify.app/top-headlines?coun
 
 let totalResults = 0;
 let page = 1;
-const pageSize = 13;
-const groupSize = 5;
+const pageSize = 9//13 -한 페이지에 표시될 뉴스의 수
+const groupSize = 3;//5 -페이지 그룹의 크기
 
 menus.forEach((menu) => {
   menu.addEventListener("click", (event) => getNewsByCategory(event));
@@ -114,14 +114,15 @@ const render = () => {
       if (newsIndex < newsList.length) {
         let news = newsList[newsIndex];
         let imageUrl = news.urlToImage || noImageUrl; // 이미지 URL이 없으면 대체 이미지 URL 사용
+        let description = news.description.length > 50 ? news.description.slice(0, 50) + '...' : news.description; // 50자까지만 보여주기
         newsRowsHTML += `
           <div class="col-lg-4 newsCol">
-            <a href="${news.url}" target="_blank">
+            <a href="${news.url}" target="_blank" class="aLink">
               <img class="news-img-size" 
               src="${imageUrl}" alt="News Image">
-            </a>
             <h2 class="title">${news.title}</h2>
-            <p>${news.description}</p>
+            <p>${description}</p>
+            </a>
             <div>
               ${news.source.name} * ${news.publishedAt}
             </div>
@@ -168,22 +169,55 @@ const paginationRender = () => {
   let firstPage =
     lastPage - (groupSize - 1) <= 0 ? 1 : lastPage - (groupSize - 1);
 
-  let paginationHTML = `<li class="page-item" onclick="moveToPage(1)">
-  <a class="page-link" href='#js-bottom'>&lt;&lt;</a>
-</li>
-  <li class="page-item" onclick="moveToPage(${page - 1})">
-<a class="page-link" href="#">Previous</a></li>`;
- 
+//   let paginationHTML = `<li class="page-item" onclick="moveToPage(1)">
+//   <a class="page-link" href='#js-bottom'>&lt;&lt;</a>
+// </li>
+//   <li class="page-item" onclick="moveToPage(${page - 1})">
+// <a class="page-link" href="#">Previous</a></li>`;
+// for (let i = firstPage; i <= lastPage; i++) {
+//     paginationHTML += `
+//   <li class="page-item ${i === page ? "active" : ""}"
+//   onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
+//   }
+//   paginationHTML += `<li class="page-item" onclick="moveToPage(${page + 1})">
+//   <a  class="page-link" href='#js-program-detail-bottom'>&gt;</a></li>
+// <li class="page-item" onclick="moveToPage(${totalPages})">
+// <a class="page-link" href='#js-bottom'>&gt;&gt;</a>
+// </li>`;
+
+let paginationHTML = "";
+
+if (page > 1) {
+  paginationHTML += `
+    <li class="page-item" onclick="moveToPage(1)">
+      <a class="page-link" href='#js-bottom'>&lt;&lt;</a>
+    </li>
+    <li class="page-item" onclick="moveToPage(${page - 1})">
+      <a class="page-link" href="#">Previous</a>
+    </li>`;
+}
+
 for (let i = firstPage; i <= lastPage; i++) {
-    paginationHTML += `
-  <li class="page-item ${i === page ? "active" : ""}"
-  onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
-  }
-  paginationHTML += `<li class="page-item" onclick="moveToPage(${page + 1})">
-  <a  class="page-link" href='#js-program-detail-bottom'>&gt;</a></li>
-<li class="page-item" onclick="moveToPage(${totalPages})">
-<a class="page-link" href='#js-bottom'>&gt;&gt;</a>
-</li>`;
+  paginationHTML += `
+    <li class="page-item ${i === page ? "active" : ""}" onclick="moveToPage(${i})">
+      <a class="page-link">${i}</a>
+    </li>`;
+}
+
+if (page < totalPages) {
+  paginationHTML += `
+    <li class="page-item" onclick="moveToPage(${page + 1})">
+      <a class="page-link" href='#js-program-detail-bottom'>Next</a>
+    </li>`;
+}
+
+if (page < totalPages - groupSize + 1) {
+  paginationHTML += `
+    <li class="page-item" onclick="moveToPage(${totalPages})">
+      <a class="page-link" href='#js-bottom'>&gt;&gt;</a>
+    </li>`;
+}
+
   document.querySelector(".pagination").innerHTML = paginationHTML;
 };
 
